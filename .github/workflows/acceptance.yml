@@ -30,7 +30,7 @@ jobs:
           node --check quality-management.js
           node --check branch-map.js
           node --check i18n.js
-          node --check asas_tests_module.js
+          node --check techno_tests_module.js
 
       - name: Regression and button acceptance
         run: python3 -m unittest -v test_server.py
