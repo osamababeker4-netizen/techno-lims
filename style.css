@@ -2634,3 +2634,95 @@ input:focus,select:focus,textarea:focus{
 @media(prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.001ms!important}
 }
+
+
+/* TECHNO V10.9.1 — Premium responsive login */
+.techno-login-screen{
+  min-height:100dvh!important;
+  padding:0!important;
+  background:
+    radial-gradient(circle at 7% 12%,rgba(245,130,32,.16),transparent 24rem),
+    linear-gradient(135deg,#eaf4fa,#f8fbfd 56%,#edf5f9)!important;
+}
+.techno-login-stage{
+  width:100%!important;
+  min-height:calc(100dvh - 46px)!important;
+  display:grid!important;
+  grid-template-columns:minmax(0,1.42fr) minmax(390px,.78fr)!important;
+}
+.techno-login-hero{
+  min-height:calc(100dvh - 46px)!important;
+  display:flex!important;
+  flex-direction:column!important;
+  justify-content:center!important;
+  padding:clamp(40px,6vw,86px)!important;
+  background:
+    linear-gradient(120deg,rgba(5,45,73,.95),rgba(17,120,188,.82) 55%,rgba(6,63,97,.88)),
+    url('engineering-pages-bg.jpg') center/cover no-repeat!important;
+}
+.techno-hero-copy{max-width:720px!important}
+.techno-hero-kicker{font-size:clamp(2.8rem,6vw,5.8rem)!important;line-height:.92!important;letter-spacing:-.045em!important}
+.techno-hero-copy h2{margin:30px 0 10px!important;font-size:clamp(1.7rem,3vw,2.6rem)!important;line-height:1.55!important}
+.techno-hero-copy p{font-size:clamp(.95rem,1.45vw,1.12rem)!important;line-height:1.9!important}
+.techno-hero-features{display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:10px!important;margin-top:40px!important}
+.techno-hero-features>div{min-height:92px!important;padding:14px 12px!important;border-radius:14px!important}
+.techno-login-pane{
+  min-height:calc(100dvh - 46px)!important;
+  display:flex!important;align-items:center!important;justify-content:center!important;
+  padding:32px!important;
+  background:linear-gradient(180deg,#fbfdff,#eef6fa)!important;
+}
+.techno-login-card{
+  position:relative!important;
+  width:min(480px,100%)!important;
+  margin:0!important;
+  padding:38px 34px 30px!important;
+  border:1px solid #dceaf1!important;border-radius:26px!important;
+  background:rgba(255,255,255,.99)!important;
+  box-shadow:0 30px 76px rgba(8,66,104,.18)!important;
+}
+.techno-login-logo{width:min(290px,84%)!important;height:102px!important;margin:0 auto 12px!important}
+.techno-login-separator{margin:5px 0 15px!important}
+.techno-login-card h1{margin:8px 0 4px!important;font-size:1.75rem!important;font-weight:900!important}
+.techno-login-welcome{margin:0 0 3px!important}
+.techno-login-form{gap:15px!important;margin-top:23px!important}
+.techno-login-form label{gap:7px!important;color:#325f7a!important;font-size:.82rem!important}
+.techno-input-wrap{min-height:53px!important;display:flex!important;align-items:center!important;padding:0 12px!important;border-radius:13px!important;background:#fbfdff!important}
+.techno-input-wrap input{min-height:51px!important;padding:11px 8px!important;border:0!important;background:transparent!important;box-shadow:none!important;font-size:16px!important}
+.techno-input-icon{width:30px!important;display:grid!important;place-items:center!important;font-size:1rem!important}
+.techno-login-submit{
+  min-height:54px!important;margin-top:4px!important;border-radius:13px!important;font-size:.96rem!important;font-weight:900!important;
+  background:linear-gradient(100deg,#0a3859,#1178bc 70%,#168acb)!important;
+  box-shadow:0 13px 28px rgba(17,120,188,.24)!important
+}
+.techno-login-submit[aria-busy="true"]{cursor:wait!important;opacity:.78!important;transform:none!important}
+.techno-login-security{margin-top:17px!important;color:#718795!important;font-size:.74rem!important}
+#loginMessage:not(:empty){margin-top:13px!important;padding:10px 12px!important;border:1px solid #f0d1d1!important;border-radius:10px!important;background:#fff6f6!important;color:#a64747!important}
+.techno-login-footer{height:46px!important;display:grid!important;place-items:center!important;font-size:.78rem!important}
+@media(max-width:900px){
+  .techno-login-stage{min-height:calc(100dvh - 40px)!important;grid-template-columns:1fr!important}
+  .techno-login-pane{order:1!important;min-height:auto!important;padding:max(14px,env(safe-area-inset-top)) 14px 14px!important}
+  .techno-login-card{width:min(560px,100%)!important;padding:28px 24px 24px!important;border-radius:22px!important}
+  .techno-login-hero{order:2!important;min-height:300px!important;padding:32px 28px 92px!important;justify-content:flex-start!important}
+  .techno-hero-kicker{font-size:3.25rem!important}
+  .techno-hero-copy h2{margin-top:20px!important;font-size:1.55rem!important}
+  .techno-hero-features{grid-template-columns:repeat(2,minmax(0,1fr))!important;margin-top:24px!important}
+  .techno-hero-features>div{min-height:76px!important}
+  .techno-side-words{display:none!important}
+  .techno-login-footer{height:40px!important}
+}
+@media(max-width:520px){
+  .techno-login-pane{padding:10px!important}
+  .techno-login-card{padding:24px 18px 20px!important;border-radius:20px!important}
+  .techno-login-logo{height:78px!important;width:min(250px,82%)!important}
+  .techno-login-card h1{font-size:1.48rem!important}
+  .techno-login-form{margin-top:18px!important}
+  .techno-input-wrap,.techno-login-submit{min-height:50px!important}
+  .techno-login-hero{min-height:255px!important;padding:25px 20px 82px!important}
+  .techno-hero-kicker{font-size:2.72rem!important}
+  .techno-hero-copy h2{font-size:1.28rem!important;line-height:1.5!important}
+  .techno-hero-copy p{font-size:.82rem!important;line-height:1.65!important}
+  .techno-hero-features{gap:7px!important;margin-top:16px!important}
+  .techno-hero-features>div{min-height:65px!important;padding:9px!important;font-size:.68rem!important}
+}
+
