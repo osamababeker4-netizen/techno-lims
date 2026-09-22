@@ -1,0 +1,44 @@
+name: Bootstrap TECHNO V10.9
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+
+jobs:
+  import:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout new TECHNO repository
+        uses: actions/checkout@v4
+        with:
+          path: target
+          fetch-depth: 0
+
+      - name: Checkout approved TECHNO V10.9 source
+        uses: actions/checkout@v4
+        with:
+          repository: osamababeker4-netizen/asas-lims
+          ref: techno-lims-v10.8.1
+          path: source
+          fetch-depth: 1
+
+      - name: Import TECHNO source and assets
+        run: |
+          rsync -a --delete \
+            --exclude '.git' \
+            --exclude '.github' \
+            source/ target/
+          cd target
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "TECHNO repository is already synchronized."
+          else
+            git commit -m "Import TECHNO LIMS V10.9"
+            git push origin main
+          fi
