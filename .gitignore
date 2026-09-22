@@ -1,0 +1,19 @@
+*.db
+*.sqlite
+*.sqlite3
+storage/
+.env
+.codex/
+
+# Android/Gradle generated output (including nested field application builds)
+**/.gradle/
+**/build/
+**/local.properties
+release/
+**/release/*
+*.apk
+*.aab
+**/release-signing.properties
+**/release/*.jks
+*.sqlite3-shm
+*.sqlite3-wal
