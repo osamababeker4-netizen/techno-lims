@@ -1,0 +1,52 @@
+name: Deploy TECHNO to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: github-pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout TECHNO
+        uses: actions/checkout@v4
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+        with:
+          enablement: true
+
+      - name: Prepare TECHNO frontend
+        run: |
+          mkdir -p _site
+          find . -maxdepth 1 -type f \( \
+            -name '*.html' -o -name '*.css' -o -name '*.js' -o \
+            -name '*.svg' -o -name '*.png' -o -name '*.jpg' -o -name '*.jpeg' -o \
+            -name '*.webp' -o -name '*.pdf' -o -name '*.webmanifest' -o -name '*.json' \
+          \) -exec cp {} _site/ \;
+          test -f _site/index.html
+          test -f _site/runtime-config.js
+          test -f _site/techno-logo.svg
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+      - name: Deploy Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
