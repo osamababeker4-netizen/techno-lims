@@ -236,7 +236,7 @@ class SchemaMigrationTests(unittest.TestCase):
         root = Path(__file__).parent
         html = (root / 'index.html').read_text(encoding='utf-8')
         scripts = '\n'.join((root / name).read_text(encoding='utf-8') for name in (
-            'app-password.js', 'quality-management.js', 'branch-map.js', 'i18n.js', 'asas_tests_module.js'))
+            'app-password.js', 'quality-management.js', 'branch-map.js', 'i18n.js', 'techno_tests_module.js'))
         server = (root / 'server.py').read_text(encoding='utf-8')
 
         ids = re.findall(r'\bid="([^"]+)"', html)
