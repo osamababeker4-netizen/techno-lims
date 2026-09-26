@@ -1215,7 +1215,7 @@ function decisionToneLabel(tone){
 function renderDecisionIntelligence(){
   if(!$('decisionIntelligenceCenter')||!dashboard)return;
   const model=decisionIntelligenceModel();
-  window.__ASAS_DECISION_INTELLIGENCE=model;
+  window.__TECHNO_DECISION_INTELLIGENCE=model;
   setText($('decisionProjectProgress'),model.project_progress+'%');
   setText($('decisionWorkOrderRate'),model.work_order_rate+'%');
   setText($('decisionTestRate'),model.test_rate+'%');
@@ -1926,8 +1926,8 @@ function openAttachmentPanel(entity) {
     setText($('recordAttachmentList'),'جارٍ تحميل المرفقات…');
     try{
       const items=await api('/api/attachments?entity_type='+encodeURIComponent(entity)+'&entity_id='+encodeURIComponent(id));
-      window.__ASAS_SMART_FILES=window.__ASAS_SMART_FILES||{};
-      items.forEach(function(item){window.__ASAS_SMART_FILES[item.id]=item;});
+      window.__TECHNO_SMART_FILES=window.__TECHNO_SMART_FILES||{};
+      items.forEach(function(item){window.__TECHNO_SMART_FILES[item.id]=item;});
       setHtml($('recordAttachmentList'),items.length?items.map(function(item){
         return '<div class="attachment-record-row"><strong>'+esc(item.original_name)+'</strong><div class="item-actions"><button class="text-btn" type="button" data-smart-open="'+item.id+'">فتح</button><button class="text-btn" type="button" data-smart-download="'+item.id+'">تنزيل</button>'+(canDeleteUploadedFiles()?'<button class="text-btn danger-link" type="button" data-smart-delete="'+item.id+'">حذف</button>':'')+'</div></div>';
       }).join(''):'لا توجد مرفقات لهذا السجل.');
@@ -1950,7 +1950,7 @@ async function deleteUploadedFile(item){
   if(!canDeleteUploadedFiles())throw new Error('ليس لديك صلاحية حذف الملفات');
   if(!window.confirm('نقل الملف «'+(item.original_name||'')+'» إلى سلة المحذوفات؟ يمكنك استعادته لاحقًا.'))return false;
   await api('/api/attachments/delete',{method:'POST',body:JSON.stringify({id:item.id})});
-  if(window.__ASAS_SMART_FILES)delete window.__ASAS_SMART_FILES[item.id];
+  if(window.__TECHNO_SMART_FILES)delete window.__TECHNO_SMART_FILES[item.id];
   documentLibraryRows=documentLibraryRows.filter(function(row){return Number(row.id)!==Number(item.id);});
   if(activePageId==='quality')renderDocumentCenterFiles();
   const smartForm=$('smartImportForm');if(smartForm&&smartForm.elements.section)await loadSmartImports(smartForm.elements.section.value);
@@ -1976,8 +1976,8 @@ function renderDocumentCenterFiles() {
   document.querySelectorAll('[data-document-group]').forEach(function(button) {
     button.classList.toggle('active', button.dataset.documentGroup === documentGroupFilter);
   });
-  window.__ASAS_SMART_FILES=window.__ASAS_SMART_FILES||{};
-  documentLibraryRows.forEach(function(item){window.__ASAS_SMART_FILES[item.id]=item;});
+  window.__TECHNO_SMART_FILES=window.__TECHNO_SMART_FILES||{};
+  documentLibraryRows.forEach(function(item){window.__TECHNO_SMART_FILES[item.id]=item;});
   const validIds=new Set(documentLibraryRows.map(function(item){return Number(item.id);}));
   documentSelectedIds.forEach(function(id){if(!validIds.has(Number(id)))documentSelectedIds.delete(id);});
   function actionButtons(item,buttonClass){
@@ -2029,7 +2029,7 @@ async function submitDocumentReplace(form){
 }
 
 async function openDocumentVersions(item){
-  const rows=await api('/api/attachments/versions?id='+encodeURIComponent(item.id));window.__ASAS_SMART_FILES=window.__ASAS_SMART_FILES||{};rows.forEach(function(row){window.__ASAS_SMART_FILES[row.id]=row;});
+  const rows=await api('/api/attachments/versions?id='+encodeURIComponent(item.id));window.__TECHNO_SMART_FILES=window.__TECHNO_SMART_FILES||{};rows.forEach(function(row){window.__TECHNO_SMART_FILES[row.id]=row;});
   modal('<h2>سجل إصدارات الملف</h2><div class="stack-list">'+rows.map(function(row,index){return '<div class="list-item"><div><strong>'+(index===0?'الحالي — ':'')+'الإصدار '+esc(row.version_no||1)+'</strong><small>'+esc(row.original_name)+' · '+esc(saudiDisplay(row.updated_at||row.created_at))+'</small></div><div class="item-actions"><button class="text-btn" data-smart-open="'+row.id+'" type="button">فتح</button><button class="text-btn" data-smart-download="'+row.id+'" type="button">تنزيل</button></div></div>';}).join('')+'</div><div class="modal-actions"><button class="btn secondary" data-modal-close type="button">إغلاق</button></div>');
 }
 
@@ -2279,8 +2279,8 @@ async function loadSmartImports(section){
   try{
     const rows=await api('/api/smart-imports?section='+encodeURIComponent(section));
     if(!rows.length){setText(box,'لا توجد ملفات مرفوعة في هذا القسم بعد.');return;}
-    window.__ASAS_SMART_FILES=window.__ASAS_SMART_FILES||{};
-    rows.forEach(function(item){window.__ASAS_SMART_FILES[item.id]=item;});
+    window.__TECHNO_SMART_FILES=window.__TECHNO_SMART_FILES||{};
+    rows.forEach(function(item){window.__TECHNO_SMART_FILES[item.id]=item;});
     const groups=['أسفلت','تربة','خرسانة','الحقل وNDT','أخرى'];
     setHtml(box,groups.map(function(group){
       const items=rows.filter(function(item){return (item.material_group||'أخرى')===group;});if(!items.length)return '';
@@ -2375,7 +2375,7 @@ function smartUploadToken(form,file){
   const key=smartFileKey(file);
   if(!form.__uploadTokens[key]){
     const random=(window.crypto&&crypto.randomUUID)?crypto.randomUUID():(Date.now().toString(36)+'-'+Math.random().toString(36).slice(2));
-    form.__uploadTokens[key]='asas-'+random;
+    form.__uploadTokens[key]='techno-'+random;
   }
   return form.__uploadTokens[key];
 }
@@ -2773,7 +2773,7 @@ async function runDeviceAcceptance() {
     }
 
     try {
-      const probe='asas-acceptance-'+Date.now();
+      const probe='techno-acceptance-'+Date.now();
       localStorage.setItem(probe,'ok');
       const ok=localStorage.getItem(probe)==='ok';
       localStorage.removeItem(probe);
@@ -2969,7 +2969,7 @@ function bindEvents() {
     if (event.target.matches('[data-field-test]')) { const test = fieldTests[Number(event.target.dataset.fieldTest)]; test[event.target.dataset.fieldKey] = event.target.value; if (event.target.dataset.fieldKey === 'catalog_id') syncFieldTestCatalog(test); if (event.target.dataset.fieldKey === 'result') renderFieldTests(); }
   });
   document.addEventListener('click',async function(event) {
-    const recommendationTask=event.target.closest('[data-recommendation-task]');if(recommendationTask){event.preventDefault();const model=window.__ASAS_DECISION_INTELLIGENCE||decisionIntelligenceModel();const item=model.recommendations[Number(recommendationTask.dataset.recommendationTask)];if(item)openOperationalTaskForm({title:item.title,detail:item.detail,priority:item.priority,source_type:'decision_recommendation'});return;}
+    const recommendationTask=event.target.closest('[data-recommendation-task]');if(recommendationTask){event.preventDefault();const model=window.__TECHNO_DECISION_INTELLIGENCE||decisionIntelligenceModel();const item=model.recommendations[Number(recommendationTask.dataset.recommendationTask)];if(item)openOperationalTaskForm({title:item.title,detail:item.detail,priority:item.priority,source_type:'decision_recommendation'});return;}
     const decisionIssue=event.target.closest('[data-decision-issue]');if(decisionIssue){event.preventDefault();openDecisionIssue(decisionIssue.dataset.decisionIssue);return;}
     const decisionAction=event.target.closest('[data-decision-action]');if(decisionAction){event.preventDefault();if(decisionAction.dataset.decisionAction)openDecisionIssue(decisionAction.dataset.decisionAction);else navigate(decisionAction.dataset.decisionPage||'dashboard');return;}
     const decisionRecord=event.target.closest('[data-decision-record]');if(decisionRecord){event.preventDefault();const type=decisionRecord.dataset.decisionRecord,id=Number(decisionRecord.dataset.recordId);closeModal();if(type==='equipment'){const item=(dashboard.equipment||[]).find(function(x){return x.id===id;});navigate('equipment');if(item)openEquipmentForm(item);}else if(type==='project'){navigate('projects');openProjectForm(id);}else if(type==='workOrder'){const item=(dashboard.work_orders||[]).find(function(x){return x.id===id;});navigate('workOrders');if(item)openWorkOrderForm(item.project_id,item);}else if(type==='samples'){const item=(dashboard.samples||[]).find(function(x){return x.id===id;});navigate('samples');if(item)openSampleForm(item);}else if(type==='tests'){navigate('tests');openTestAssignment(id);}else if(type==='reports'){navigate('reports');reviewReport(id);}else if(type==='clients'){const item=(dashboard.clients||[]).find(function(x){return x.id===id;});navigate('clients');if(item)openClientForm(item);}return;}
@@ -2987,12 +2987,12 @@ function bindEvents() {
     const removeSelected=event.target.closest('[data-smart-remove-selected]');if(removeSelected){event.preventDefault();const form=$('smartImportForm');if(form){form.__selectedFiles=smartSelectedFiles(form).filter(function(_file,index){return index!==Number(removeSelected.dataset.smartRemoveSelected);});renderSmartSelectedFiles(form);}return;}
     const retryFailed=event.target.closest('[data-smart-retry-failed]');if(retryFailed){event.preventDefault();const form=$('smartImportForm');if(form)try{await submitSmartImport(form);}catch(error){showToast(error.message,true);}return;}
     const bulkFileAction=event.target.closest('[data-file-bulk]');if(bulkFileAction){event.preventDefault();try{await runDocumentBulk(bulkFileAction.dataset.fileBulk);}catch(error){showToast(error.message,true);}return;}
-    const smartEdit=event.target.closest('[data-smart-edit]');if(smartEdit){event.preventDefault();openDocumentEdit((window.__ASAS_SMART_FILES||{})[Number(smartEdit.dataset.smartEdit)]);return;}
-    const smartReplace=event.target.closest('[data-smart-replace]');if(smartReplace){event.preventDefault();openDocumentReplace((window.__ASAS_SMART_FILES||{})[Number(smartReplace.dataset.smartReplace)]);return;}
-    const smartVersions=event.target.closest('[data-smart-versions]');if(smartVersions){event.preventDefault();const item=(window.__ASAS_SMART_FILES||{})[Number(smartVersions.dataset.smartVersions)];if(item)try{await openDocumentVersions(item);}catch(error){showToast(error.message,true);}return;}
-    const smartOpen=event.target.closest('[data-smart-open]');if(smartOpen){event.preventDefault();const item=(window.__ASAS_SMART_FILES||{})[Number(smartOpen.dataset.smartOpen)];if(item)try{await authenticatedAttachmentDownload(item,true);}catch(error){showToast(error.message,true);}return;}
-    const smartDownload=event.target.closest('[data-smart-download]');if(smartDownload){event.preventDefault();const item=(window.__ASAS_SMART_FILES||{})[Number(smartDownload.dataset.smartDownload)];if(item)try{await authenticatedAttachmentDownload(item,false);}catch(error){showToast(error.message,true);}return;}
-    const smartDelete=event.target.closest('[data-smart-delete]');if(smartDelete){event.preventDefault();const item=(window.__ASAS_SMART_FILES||{})[Number(smartDelete.dataset.smartDelete)];if(item)try{await deleteUploadedFile(item);}catch(error){showToast(error.message,true);}return;}
+    const smartEdit=event.target.closest('[data-smart-edit]');if(smartEdit){event.preventDefault();openDocumentEdit((window.__TECHNO_SMART_FILES||{})[Number(smartEdit.dataset.smartEdit)]);return;}
+    const smartReplace=event.target.closest('[data-smart-replace]');if(smartReplace){event.preventDefault();openDocumentReplace((window.__TECHNO_SMART_FILES||{})[Number(smartReplace.dataset.smartReplace)]);return;}
+    const smartVersions=event.target.closest('[data-smart-versions]');if(smartVersions){event.preventDefault();const item=(window.__TECHNO_SMART_FILES||{})[Number(smartVersions.dataset.smartVersions)];if(item)try{await openDocumentVersions(item);}catch(error){showToast(error.message,true);}return;}
+    const smartOpen=event.target.closest('[data-smart-open]');if(smartOpen){event.preventDefault();const item=(window.__TECHNO_SMART_FILES||{})[Number(smartOpen.dataset.smartOpen)];if(item)try{await authenticatedAttachmentDownload(item,true);}catch(error){showToast(error.message,true);}return;}
+    const smartDownload=event.target.closest('[data-smart-download]');if(smartDownload){event.preventDefault();const item=(window.__TECHNO_SMART_FILES||{})[Number(smartDownload.dataset.smartDownload)];if(item)try{await authenticatedAttachmentDownload(item,false);}catch(error){showToast(error.message,true);}return;}
+    const smartDelete=event.target.closest('[data-smart-delete]');if(smartDelete){event.preventDefault();const item=(window.__TECHNO_SMART_FILES||{})[Number(smartDelete.dataset.smartDelete)];if(item)try{await deleteUploadedFile(item);}catch(error){showToast(error.message,true);}return;}
     const button = event.target.closest('button');
     if (!button) return;
     if (button.hasAttribute('data-modal-close')) return closeModal();

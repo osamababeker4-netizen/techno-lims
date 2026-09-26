@@ -1778,18 +1778,18 @@ class H(BaseHTTPRequestHandler):
                 integrity = connection.execute('PRAGMA quick_check').fetchone()[0]
                 database_write = 'ok'
                 write_error = ''
-                probe_key = '__asas_acceptance_probe__'
+                probe_key = '__techno_acceptance_probe__'
                 try:
-                    connection.execute('SAVEPOINT asas_acceptance_probe')
+                    connection.execute('SAVEPOINT techno_acceptance_probe')
                     connection.execute('insert or replace into settings(key,value) values(?,?)', (probe_key, str(time.time())))
-                    connection.execute('ROLLBACK TO asas_acceptance_probe')
-                    connection.execute('RELEASE asas_acceptance_probe')
+                    connection.execute('ROLLBACK TO techno_acceptance_probe')
+                    connection.execute('RELEASE techno_acceptance_probe')
                 except sqlite3.Error as error:
                     database_write = 'failed'
                     write_error = str(error)
                     try:
-                        connection.execute('ROLLBACK TO asas_acceptance_probe')
-                        connection.execute('RELEASE asas_acceptance_probe')
+                        connection.execute('ROLLBACK TO techno_acceptance_probe')
+                        connection.execute('RELEASE techno_acceptance_probe')
                     except sqlite3.Error:
                         pass
                 active_users = [dict(row) for row in connection.execute(

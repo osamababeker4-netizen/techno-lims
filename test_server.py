@@ -500,7 +500,7 @@ class SchemaMigrationTests(unittest.TestCase):
     def test_dashboard_and_login_use_primary_company_logo_without_removed_hero_controls(self):
         html = (Path(__file__).parent / 'index.html').read_text(encoding='utf-8')
         css = (Path(__file__).parent / 'style.css').read_text(encoding='utf-8')
-        self.assertNotIn('ASAS OPERATIONS CENTER', html)
+        self.assertNotIn('LEGACY OPERATIONS CENTER', html)
         self.assertNotIn('من العينة إلى التقرير — في مسار واحد واضح', html)
         self.assertIn('src="techno-logo.svg" class="login-logo techno-login-logo"', html)
         self.assertGreaterEqual(html.count('src="techno-logo.svg"'), 4)
@@ -597,7 +597,7 @@ class SchemaMigrationTests(unittest.TestCase):
         self.assertIn('data-smart-open', app)
         self.assertNotIn("excel?'تشغيل/تنزيل':'فتح'", app)
 
-    def test_asas_brand_palette_is_consistent(self):
+    def test_techno_brand_palette_is_consistent(self):
         css = (Path(__file__).parent / 'style.css').read_text(encoding='utf-8')
         self.assertIn('--primary:#0f6f78', css)
         self.assertIn('--primary-deep:#0a4650', css)
@@ -1290,7 +1290,7 @@ class SchemaMigrationTests(unittest.TestCase):
         technician = {'role':'technician'}
         before_audit = connection.execute('select count(*) from audit_log').fetchone()[0]
 
-        stored = self.server.store_smart_file(connection, admin, 'technicalLibrary', 'device-output.sensorbin', b'\x00\x01ASAS binary payload')
+        stored = self.server.store_smart_file(connection, admin, 'technicalLibrary', 'device-output.sensorbin', b'\x00\x01TECHNO binary payload')
         self.assertEqual(stored['category'], 'ملف SENSORBIN')
         row = connection.execute('select * from record_attachments where id=?', (stored['id'],)).fetchone()
         self.assertTrue(self.server.attachment_delete_allowed(admin, row))
