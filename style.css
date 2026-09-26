@@ -2726,3 +2726,30 @@ input:focus,select:focus,textarea:focus{
   .techno-hero-features>div{min-height:65px!important;padding:9px!important;font-size:.68rem!important}
 }
 
+
+
+/* TECHNO V10.9.2 — notification layer / stacking fix
+   Keeps the bell panel above dashboard content while preserving sidebar and modal priority. */
+.topbar{
+  position:relative!important;
+  z-index:45!important;
+}
+.page.active{
+  position:relative;
+  z-index:1;
+}
+.sidebar{
+  z-index:50!important;
+}
+.notification-wrap{
+  position:relative;
+  z-index:2;
+}
+.notification-panel{
+  z-index:90!important;
+  background:#fff!important;
+  opacity:1!important;
+  isolation:isolate;
+  backdrop-filter:none!important;
+  -webkit-backdrop-filter:none!important;
+}
