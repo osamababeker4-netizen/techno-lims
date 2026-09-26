@@ -1,7 +1,7 @@
 /**
  * ============================================================================
- * شركة مختبر أساس للإستشارات الفنية والمختبرات الهندسية
- * ASAS LIMS - وحدة الفحوصات والحسابات الآلية المتقدمة (#tests)
+ * شركة تيكنو سويل لاب للاستشارات الفنية والمختبرات الهندسية
+ * TECHNO LIMS - وحدة الفحوصات والحسابات الآلية المتقدمة (#tests)
  * متوافق مع كود البناء السعودي (SBC) ومواصفات ASTM و ISO/IEC 17025
  * ============================================================================
  */
@@ -9,7 +9,7 @@
 (function(window, document) {
   'use strict';
 
-  const AsasTests = {
+  const TechnoTests = {
     // قاعدة بيانات الفحوصات الجارية
     tests: [
       {
@@ -55,7 +55,7 @@
 
     // تشغيل وتهيئة الوحدة
     init: function() {
-      console.log('ASAS LIMS: Tests Engine Active.');
+      console.log('TECHNO LIMS: Tests Engine Active.');
       this.renderTable();
       this.bindSearch();
     },
@@ -90,10 +90,10 @@
           <td class="py-3.5 px-4">${this.getStatusBadge(t.status)}</td>
           <td class="py-3.5 px-4 text-xs text-slate-600 font-semibold">${t.testedBy}</td>
           <td class="py-3.5 px-4 text-center">
-            <button onclick="AsasTests.showDetails('${t.id}')" title="معاينة الحسابات" class="px-2.5 py-1 text-xs font-bold bg-blue-50 text-blue-700 hover:bg-blue-100 rounded-lg transition">
+            <button onclick="TechnoTests.showDetails('${t.id}')" title="معاينة الحسابات" class="px-2.5 py-1 text-xs font-bold bg-blue-50 text-blue-700 hover:bg-blue-100 rounded-lg transition">
               معاينة
             </button>
-            <button onclick="AsasTests.printReport('${t.id}')" title="طباعة شهادة الفحص" class="px-2.5 py-1 text-xs font-bold bg-slate-100 text-slate-700 hover:bg-slate-200 rounded-lg transition mr-1">
+            <button onclick="TechnoTests.printReport('${t.id}')" title="طباعة شهادة الفحص" class="px-2.5 py-1 text-xs font-bold bg-slate-100 text-slate-700 hover:bg-slate-200 rounded-lg transition mr-1">
               تقرير
             </button>
           </td>
@@ -177,7 +177,7 @@
     showDetails: function(testId) {
       const t = this.tests.find(x => x.id === testId);
       if (!t) return;
-      alert(`شركة مختبر أساس للإستشارات الفنية والمختبرات الهندسية\n` +
+      alert(`شركة تيكنو سويل لاب للاستشارات الفنية والمختبرات الهندسية\n` +
             `--------------------------------------------------\n` +
             `رقم الفحص: ${t.id}\nالمشروع: ${t.project}\nنوع الاختبار: ${t.testName}\nالمعيار: ${t.standard}\n` +
             `الفني المختص: ${t.testedBy}\nالملاحظات: ${t.remarks}`);
@@ -185,7 +185,7 @@
 
     // طباعة الشهادة والتقرير
     printReport: function(testId) {
-      alert(`مختبر أساس:\nجاري إنشاء تقرير الاختبار المعتمد رقم (${testId}) متضمناً ختم الجودة ورمز QR للتحقق.`);
+      alert(`تيكنو سويل لاب:\nجاري إنشاء تقرير الاختبار المعتمد رقم (${testId}) متضمناً ختم الجودة ورمز QR للتحقق.`);
     },
 
     // ربط البحث السريع
@@ -206,12 +206,12 @@
     }
   };
 
-  window.AsasTests = AsasTests;
+  window.TechnoTests = TechnoTests;
 
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', () => AsasTests.init());
+    document.addEventListener('DOMContentLoaded', () => TechnoTests.init());
   } else {
-    AsasTests.init();
+    TechnoTests.init();
   }
 
 })(window, document);
