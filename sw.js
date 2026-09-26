@@ -1,9 +1,9 @@
 'use strict';
-const CACHE_NAME = 'techno-lims-pwa-v10-9-1-login-responsive';
+const CACHE_NAME = 'techno-lims-pwa-v10-9-4-techno-data-sync';
 const APP_SHELL = [
-  './','./index.html','./style.css?v=10-9-1-login-responsive','./app-password.js?v=10-9-1-login-responsive',
-  './quality-management.js?v=10-9-1-login-responsive','./branch-map.js?v=10-9-1-login-responsive','./i18n.js?v=10-9-1-login-responsive',
-  './runtime-config.js?v=10-9-1-login-responsive','./field-test-guide.html','./manifest.webmanifest',
+  './','./index.html','./style.css?v=10-9-4-techno-data-sync','./app-password.js?v=10-9-4-techno-data-sync',
+  './quality-management.js?v=10-9-4-techno-data-sync','./branch-map.js?v=10-9-4-techno-data-sync','./i18n.js?v=10-9-4-techno-data-sync',
+  './runtime-config.js?v=10-9-4-techno-data-sync','./field-test-guide.html','./manifest.webmanifest',
   './techno-logo.svg','./engineering-pages-bg.jpg','./whatsapp-logo.svg','./telegram-logo.svg'
 ];
 self.addEventListener('install', function(event) {

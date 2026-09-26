@@ -1,7 +1,7 @@
 # Current Release
 
-**TECHNO LIMS V10.9.2 — Notification Layer Fix**
+**TECHNO LIMS V10.9.4 — Data & Production Sync**
 
-Release marker: `10.9.2-notification-layer`
+Release marker: `10.9.4-techno-data-sync`
 
-Fixes the notification bell panel stacking so alerts render above dashboard cards/content, with an opaque white panel. Sidebar and modal layers keep higher priority where appropriate.
+This release aligns the canonical TECHNO repository with the production-hardened backend, refreshes official company/service data, unifies PWA/UI/API version markers, and corrects production validation so it targets TECHNO rather than ASAS.
