@@ -1,7 +1,7 @@
 # Current Release
 
-**TECHNO LIMS V10.9.0 — Full System Review**
+**TECHNO LIMS V10.9.2 — Notification Layer Fix**
 
-Release marker: `10.9.0-system-review`
+Release marker: `10.9.2-notification-layer`
 
-This is the only active release represented on the `main` branch. Historical imported ASAS bundles and obsolete release notes were removed from `main` and preserved in the archive branch created before cleanup.
+Fixes the notification bell panel stacking so alerts render above dashboard cards/content, with an opaque white panel. Sidebar and modal layers keep higher priority where appropriate.
