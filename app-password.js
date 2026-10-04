@@ -21,7 +21,7 @@ function normalizeLoginId(value) {
   return raw;
 }
 function updateSaudiClock(){ const el=$('saudiClock'); if(el) setText(el,'توقيت السعودية: '+saudiNow()); }
-const STORAGE_KEY = 'techno_lims_v1083';
+const STORAGE_KEY = 'techno_lims_v1094';
 const PROJECT_STATUSES = ['مخطط', 'نشط', 'موقوف', 'قيد المراجعة', 'معتمد', 'مكتمل'];
 const BOARD_STATUSES = ['مخطط', 'نشط', 'قيد المراجعة', 'موقوف', 'مكتمل'];
 const PRIORITIES = ['منخفضة', 'متوسطة', 'عالية', 'حرجة'];
